@@ -1,0 +1,53 @@
+.home__main-content {
+  display: flex;
+}
+
+.home__filter-aside {
+  align-items: center;
+  justify-content: center;
+  background-color: lighten($color: $primary, $amount: 15);
+  color: darken($color: white, $amount: 60);
+  display: flex;
+  font-size: 12px;
+  height: 100vh;
+  padding-bottom: 2%;
+  padding-top: 2%;
+  width: 25%;
+}
+
+.home__title {
+  color: black;
+  display: flex;
+  font-size: 12px;
+  justify-content: center;
+  margin-bottom: 5%;
+}
+
+.home__filter {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.home__search-input {  
+  background-color: lighten($color: $primary, $amount: 15);
+  border: 0px;
+  border-bottom: 1px solid $dark;
+  color: black;
+  font-size: 12px;
+  height: 15px;
+  margin-bottom: 15px;
+  width: 80%;
+
+  transition: border-bottom .3s ease;
+  &:focus {
+    border-bottom: 1px solid $primary;
+    outline: none;
+  }
+}
+
+.home__checkboxes {
+  margin-left: 15%;
+  margin-bottom: 15px;
+  // width: 75%;
+}
