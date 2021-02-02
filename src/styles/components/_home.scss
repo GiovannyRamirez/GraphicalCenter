@@ -10,8 +10,6 @@
   display: flex;
   font-size: 12px;
   height: 100vh;
-  padding-bottom: 2%;
-  padding-top: 2%;
   width: 25%;
 }
 
@@ -49,5 +47,35 @@
 .home__checkboxes {
   margin-left: 15%;
   margin-bottom: 15px;
-  // width: 75%;
+}
+
+.home__container {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+  justify-content: space-around;
+  overflow: scroll;
+  width: 100%;
+}
+
+@media screen and (max-width: 850px) {
+  .home__filter-aside {
+    align-items: center;
+    justify-content: center;
+    background-color: lighten($color: $primary, $amount: 15);
+    color: darken($color: white, $amount: 60);
+    display: flex;
+    font-size: 12px;
+    height: 100vh;
+    width: 40vw;
+  }
+
+  .home__container {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100vh;
+    justify-content: space-around;
+    overflow: scroll;
+    width: 60vw;
+  }
 }

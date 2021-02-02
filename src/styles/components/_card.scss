@@ -1,0 +1,26 @@
+.card__agency {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 200px;
+  margin-bottom: 3%;
+  margin-top: 3%;
+  outline: thick double black;
+  text-align: center;
+  width: 200px;
+
+  p {
+    width: 100%;
+  }
+
+  transition: transform .25s ease;
+  &:hover {
+    transform: rotate(7deg);
+  }
+}
+
+.card__agency-image {
+  background-color: blue;
+  height: 58%;
+  width: 100%;
+}

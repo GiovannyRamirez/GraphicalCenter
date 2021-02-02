@@ -11,7 +11,7 @@ export function FilterBar () {
           <label 
             htmlFor='search'
           >
-            Ingresa tu criterio de búsqueda
+            Criterio de búsqueda
           </label>
         </div>
         <div className='home__filter'>

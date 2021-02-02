@@ -1,11 +1,13 @@
 import { FilterBar } from './FilterBar'
+import { Agencies } from '../components/Agencies'
 
 export function Home () {
+  
   return (
     <div className='home__main-content'>
       <FilterBar />
       <>
-        <h1>GraphicalCenter</h1>
+        <Agencies />
       </>
     </div>
   )
