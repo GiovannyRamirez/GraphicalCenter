@@ -1,15 +1,38 @@
 import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { useForm } from '../../hooks/useForm' 
+import { googleLogin } from '../../actions/auth'
 
 export function Login () {
+
+  const [formValues, handleInputChange] = useForm({
+    email: 'giovannyramirezs@hotmail.com',
+    password: '1234'
+  })
+
+  const dispatch = useDispatch()
+
+  const handleLogin = e => {
+    e.preventDefault()
+  }
+
+  const handleGoogleLogin = () => {
+    dispatch(googleLogin())
+  }
+
+  const { email, password } = formValues
+
   return (
     <>
       <h3 className='auth__title'>Iniciar sesión</h3>
-      <form>
+      <form onSubmit={ handleLogin }>
         <input 
           className='auth__input'
           type='email'
           placeholder='Correo electrónico'
           name='email'
+          value={ email }
+          onChange={handleInputChange}
           autoComplete='off'
         />
         <input 
@@ -17,6 +40,8 @@ export function Login () {
           type='password'
           placeholder='Contraseña'
           name='password'
+          value={ password }
+          onChange={handleInputChange}
         />
         <button
           className='btn btn-primary' 
@@ -25,7 +50,10 @@ export function Login () {
         </button>
 
         <div className='auth__external'>
-          <div className='google-btn'>
+          <div 
+            className='google-btn'
+            onClick={handleGoogleLogin}
+          >
             <div className='google-icon-wrapper'>
               <img 
                 className='google-icon' 
