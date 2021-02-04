@@ -1,28 +1,34 @@
 import { firebase, googleAuthProvider } from '../firebase/firebaseConfig'
 import { types } from '../types/types'
-import { setError } from './ui'
+import { setError, startLoading, finishLoading } from './ui'
 
-// export const loginEmailPassword = (email, password) => {
-//   return (dispatch) => {
-//     firebase.auth().signInWithEmailAndPassword(email, password)
-//       .then(({ user }) => {
-//         dispatch(login(user.id, user.displayName))
-//       })
-//       .catch( err => {
-//         console.log(err)
-//       })
-//   }
-// }
-
-export const registerEmailPassword = (email, password, name) => {
+export const loginEmailPassword = (email, password) => {
   return (dispatch) => {
-    firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then( async ({ user }) => {
-       await user.updateProfile({ displayName: name })
-        dispatch(login(user.id, user.displayName))
+    dispatch(startLoading())
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then(({ user }) => {
+        dispatch(login(user.uid, user.displayName))
+        dispatch(finishLoading())
       })
       .catch( err => {
         dispatch(setError(err.code))
+        dispatch(finishLoading)
+      })
+  }
+}
+
+export const registerEmailPassword = (email, password, name) => {
+  return (dispatch) => {
+    dispatch(startLoading())
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then( async ({ user }) => {
+       await user.updateProfile({ displayName: name })
+        dispatch(login(user.uid, user.displayName))
+        dispatch(finishLoading())
+      })
+      .catch( err => {
+        dispatch(setError(err.code))
+        dispatch(finishLoading())
       })
   }
 }
@@ -32,6 +38,9 @@ export const googleLogin = () => {
     firebase.auth().signInWithPopup(googleAuthProvider)
       .then(({ user }) => {
         dispatch(login(user.uid, user.displayName))
+      })
+      .catch( err => {
+        dispatch(setError(err.code))
       })
   }
 }

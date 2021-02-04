@@ -8,7 +8,7 @@ export function Register () {
 
   const dispatch = useDispatch()
 
-  const { msgError } = useSelector( state => state.ui )
+  const { msgError, loading } = useSelector( state => state.ui )
 
   const [formValues, handleInputChange] = useForm({
     name: 'Giovanny',
@@ -20,12 +20,12 @@ export function Register () {
   const handleRegister = e => {
     e.preventDefault()
     if (isFormValid()) {
-      dispatch(registerEmailPassword(email, password))
+      dispatch(registerEmailPassword(email, password, name))
     } 
   }
 
-  // Pass at least 5 char with 1 digit, 1 lowercase, 1 uppercase
-  const regExPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}$/
+  // Pass at least 6 char with 1 digit, 1 lowercase, 1 uppercase
+  const regExPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/
   // Mail with @ and finished with at least 2 char
   const regExMail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
 
@@ -36,7 +36,7 @@ export function Register () {
     } else if (password !== passwordConf) {
       dispatch(setError('Contraseñas no coinciden'))
       return false
-    } else if (!password.match(regExPass) || password.length < 6) {
+    } else if (!password.match(regExPass)) {
       dispatch(setError('Contraseña no cumple requisitos'))
       return false
     } else if (!email.match(regExMail)) {
@@ -98,6 +98,7 @@ export function Register () {
         <button
           className='btn btn-primary' 
           type='submit'
+          disabled={ loading }
         > Register 
         </button>
         

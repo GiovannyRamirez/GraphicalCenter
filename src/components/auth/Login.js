@@ -1,19 +1,42 @@
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from '../../hooks/useForm' 
-import { googleLogin } from '../../actions/auth'
+import { setError, removeError } from '../../actions/ui'
+import { googleLogin, loginEmailPassword } from '../../actions/auth'
 
 export function Login () {
 
   const [formValues, handleInputChange] = useForm({
     email: 'giovannyramirezs@hotmail.com',
-    password: '1234'
+    password: 'g1oVRz',
   })
 
   const dispatch = useDispatch()
 
+  const { msgError, loading } = useSelector(state => state.ui)
+
+  // Pass at least 6 char with 1 digit, 1 lowercase, 1 uppercase
+  const regExPass = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$/
+  // Mail with @ and finished with at least 2 char
+  const regExMail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+  
+  const isFormValid = () => {
+    if (!password.match(regExPass)) {
+      dispatch(setError('Contraseña no cumple requisitos'))
+      return false
+    } else if (!email.match(regExMail)) {
+      dispatch(setError('Email inválido'))
+      return false
+    }
+    dispatch(removeError())
+    return true
+  }
+
   const handleLogin = e => {
     e.preventDefault()
+    if (isFormValid) {
+      dispatch(loginEmailPassword(email, password))
+    }
   }
 
   const handleGoogleLogin = () => {
@@ -25,10 +48,18 @@ export function Login () {
   return (
     <>
       <h3 className='auth__title'>Iniciar sesión</h3>
+
+      {
+        msgError &&
+        <div className='auth__alert-error'>
+          { msgError }
+        </div>
+      }
+
       <form onSubmit={ handleLogin }>
         <input 
           className='auth__input'
-          type='email'
+          type='text'
           placeholder='Correo electrónico'
           name='email'
           value={ email }
@@ -38,7 +69,7 @@ export function Login () {
         <input 
           className='auth__input'
           type='password'
-          placeholder='Contraseña'
+          placeholder='Contraseña (Mín. 6: 1num & 1min & 1may)'
           name='password'
           value={ password }
           onChange={handleInputChange}
@@ -46,6 +77,7 @@ export function Login () {
         <button
           className='btn btn-primary' 
           type='submit'
+          disabled= { loading }
         > Iniciar sesión 
         </button>
 
