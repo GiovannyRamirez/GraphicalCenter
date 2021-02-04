@@ -1,6 +1,18 @@
 import { Link } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { startLogout } from '../../actions/auth'
 
 export function FilterBar () {
+
+  const { uid } = useSelector(state => state.auth)
+
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    console.log('Logout')
+    dispatch(startLogout())
+  }
+
   return (
     <aside className='home__filter-aside'>
       <div>
@@ -55,6 +67,16 @@ export function FilterBar () {
           > Soy un negocio
           </Link>
         </div>
+        {
+          uid &&
+          <div className='home__filter'>
+            <button
+              className='btn btn-primary'
+              onClick={ handleLogout }
+            > Logout
+            </button>
+          </div>
+        }
       </div>
     </aside>
   )
