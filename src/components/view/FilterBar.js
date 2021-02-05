@@ -4,26 +4,51 @@ import { startLogout } from '../../actions/auth'
 
 export function FilterBar () {
 
-  const { uid } = useSelector(state => state.auth)
+  const { uid, name } = useSelector(state => state.auth)
 
   const dispatch = useDispatch()
 
   const handleLogout = () => {
-    console.log('Logout')
     dispatch(startLogout())
   }
 
   return (
     <aside className='home__filter-aside'>
       <div>
-        <h3 className='home__title'>
-          Búsqueda detallada
-        </h3>
+        {
+          uid &&
+          <div className='mb-5'>
+            <div className='home__filter'>
+              <h4 className='home__title'>
+                {name}
+              </h4>
+            </div>
+            <div className='home__title'>
+              <Link to='/edit-profile'
+                className='link'
+              > Editar mi perfil
+              </Link>
+            </div>
+            <div className='home__filter'>
+              <button
+                className='btn btn-primary'
+                onClick={ handleLogout }
+              > Logout
+              </button>
+            </div>
+            <hr className='mt-1'/>
+          </div>
+        }
+        <div className='home__filter'>
+          <h3 className='home__title'>
+            Búsqueda detallada
+          </h3>
+        </div>
         <div className='home__filter'>
           <label 
             htmlFor='search'
           >
-            Criterio de búsqueda
+            Ciudad
           </label>
         </div>
         <div className='home__filter'>
@@ -54,27 +79,20 @@ export function FilterBar () {
             type='checkbox'
             name='sticker'
           />
-          <label htmlFor='pendon'> Calcomanías</label><br />
+          <label htmlFor='sticker'> Calcomanías</label><br />
           <input 
             type='checkbox'
             name='mug'
           />
-          <label htmlFor='pendon'> Mugs</label><br />        
-        </div>
-        <div className='home__filter'>
-          <Link to='/auth/login'
-            className='link'
-          > Soy un negocio
-          </Link>
+          <label htmlFor='mug'> Mugs</label><br />        
         </div>
         {
-          uid &&
+          !uid && 
           <div className='home__filter'>
-            <button
-              className='btn btn-primary'
-              onClick={ handleLogout }
-            > Logout
-            </button>
+            <Link to='/auth/login'
+              className='link'
+            > Soy un negocio
+            </Link>
           </div>
         }
       </div>
