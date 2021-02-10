@@ -12,7 +12,7 @@ export const loginEmailPassword = (email, password) => {
       })
       .catch( err => {
         dispatch(setError(err.code))
-        dispatch(finishLoading)
+        dispatch(finishLoading())
       })
   }
 }

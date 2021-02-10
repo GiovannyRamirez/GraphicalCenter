@@ -7,4 +7,13 @@ export const types = {
 
   uiStartLoading: 'Loading...',
   uiFinishLoading: 'Finish',
+
+  postsNew: 'New Post',
+  postsActive: 'Active Post',
+  postsLoad: 'Load Posts',
+  postsUpdate: 'Update Post',
+  postsUrl: 'Image Post',
+  postsDelete: 'Delete Post',
+  postsLogout: 'Clean Posts',
+
 }

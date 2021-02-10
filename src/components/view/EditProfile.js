@@ -1,5 +1,14 @@
+import { SideBar } from './SideBar'
+import { Posts } from '../components/Posts'
+
 export function EditProfile () {
+  
   return (
-    <h1>Editar mi perfil</h1>
+    <div className='home__main-content'>
+      <SideBar />
+      <>
+        <Posts />
+      </>
+    </div>
   )
 }

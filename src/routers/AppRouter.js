@@ -12,6 +12,7 @@ import { Home } from '../components/view/Home'
 import { EditProfile } from '../components/view/EditProfile'
 import { PrivateRoute } from './PrivateRoute'
 import { login } from '../actions/auth'
+import { startLoadPosts } from '../actions/posts'
 
 export function AppRouter () {
 
@@ -23,6 +24,7 @@ export function AppRouter () {
       if (user?.uid) {
         dispatch(login(user.uid, user.displayName))
         setIsAuth(true)
+        dispatch(startLoadPosts(user.uid))
       } else {
         setIsAuth(false)
       }

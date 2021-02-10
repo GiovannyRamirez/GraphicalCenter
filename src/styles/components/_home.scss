@@ -58,6 +58,10 @@
   width: 100%;
 }
 
+.home__container::-webkit-scrollbar {
+  display: none;
+}
+
 @media screen and (max-width: 850px) {
   .home__filter-aside {
     align-items: center;

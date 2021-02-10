@@ -9,6 +9,11 @@
   &:focus {
     outline: none;
   }  
+
+  transition: color .25s ease;
+  &:hover {
+    color: black;
+  }
 }
 
 .btn-primary {
