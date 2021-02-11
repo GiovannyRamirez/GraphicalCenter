@@ -1,6 +1,8 @@
+import Swal from 'sweetalert2'
 import { firebase, googleAuthProvider } from '../firebase/firebaseConfig'
 import { types } from '../types/types'
 import { setError, startLoading, finishLoading } from './ui'
+import { logoutPosts } from './posts'
 
 export const loginEmailPassword = (email, password) => {
   return (dispatch) => {
@@ -9,6 +11,7 @@ export const loginEmailPassword = (email, password) => {
       .then(({ user }) => {
         dispatch(login(user.uid, user.displayName))
         dispatch(finishLoading())
+        Swal.fire('Bienvenido', user.displayName, 'success')
       })
       .catch( err => {
         dispatch(setError(err.code))
@@ -25,6 +28,7 @@ export const registerEmailPassword = (email, password, name) => {
        await user.updateProfile({ displayName: name })
         dispatch(login(user.uid, user.displayName))
         dispatch(finishLoading())
+        Swal.fire('Bienvenido', user.displayName, 'success')
       })
       .catch( err => {
         dispatch(setError(err.code))
@@ -38,6 +42,7 @@ export const googleLogin = () => {
     firebase.auth().signInWithPopup(googleAuthProvider)
       .then(({ user }) => {
         dispatch(login(user.uid, user.displayName))
+        Swal.fire('Bienvenido', user.displayName, 'success')
       })
       .catch( err => {
         dispatch(setError(err.code))
@@ -59,6 +64,7 @@ export const startLogout = () => {
   return async (dispatch) => {
     await firebase.auth().signOut()
     dispatch(logout())
+    dispatch(logoutPosts())
   }
 }
 

@@ -9,6 +9,7 @@ import { useDispatch } from 'react-redux'
 import { firebase } from '../firebase/firebaseConfig'
 import { AuthRouter } from './AuthRouter'
 import { Home } from '../components/view/Home' 
+import { Loading } from '../components/view/Loading'
 import { EditProfile } from '../components/view/EditProfile'
 import { PrivateRoute } from './PrivateRoute'
 import { login } from '../actions/auth'
@@ -17,6 +18,7 @@ import { startLoadPosts } from '../actions/posts'
 export function AppRouter () {
 
   const dispatch = useDispatch()
+  const [checking, setChecking] = useState(true)
   const [isAuth, setIsAuth] = useState(false)
 
   useEffect(() => {
@@ -28,8 +30,11 @@ export function AppRouter () {
       } else {
         setIsAuth(false)
       }
+      setChecking(false)
     })
-  },[dispatch, setIsAuth])
+  },[dispatch, setIsAuth, setChecking])
+
+  if (checking) return <Loading />
 
   return (
     <Router>

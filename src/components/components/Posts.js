@@ -1,21 +1,24 @@
-import { data } from '../../mocked'
+import { useSelector } from 'react-redux'
 import { Post } from './Post'
 
 export function Posts () {
 
-  const agencies = data
+  const { posts } = useSelector(state => state.posts)
 
   return (
     <div className='home__container'>      
       {
-        agencies && agencies.length === 0 &&
+        posts && posts.length === 0 &&
           <h1>No Data Available</h1>
       }
       {
-        agencies && agencies.length > 0 &&
-        agencies.map(agency => {
+        posts && posts.length > 0 &&
+        posts.map(post => {
           return (
-            <Post key={agency.id} />
+            <Post 
+              key={post.id}
+              {...post}
+            />
           )
         })
       }

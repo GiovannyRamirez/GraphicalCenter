@@ -4,9 +4,7 @@ export function NothingSelected () {
       <p>
         Nueva publicación
         <br />
-        o 
-        <br />
-        Edita alguna
+        Edita alguna seleccionandola
       </p>
     </div>
   )

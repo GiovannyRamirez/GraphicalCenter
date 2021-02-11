@@ -14,10 +14,38 @@ export const postReducer = (state = initialState, action) => {
           ...action.payload
         }
       }
+    case types.postsNew:
+      return {
+        ...state,
+        posts: [action.payload, ...state.posts],
+      }
     case types.postsLoad:
       return {
         ...state,
         posts: [...action.payload]
+      }
+    case types.postsUpdate:
+      return {
+        ...state,
+        posts: state.posts.map(
+          post => post.id === action.payload.id ?
+            action.payload.post :
+            post
+        )
+      }
+    case types.postsDelete:
+      return {
+        ...state,
+        active: null,
+        posts: state.posts.filter(
+          post => post.id !== action.payload
+        )
+      }
+    case types.postsLogout:
+      return {
+        ...state,
+        active: null,
+        posts: [],
       }
     default:
       return state;
