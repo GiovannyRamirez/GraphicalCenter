@@ -16,4 +16,8 @@ export const types = {
   postsDelete: 'Delete Post',
   postsLogout: 'Clean Posts',
 
+  agencyActive: 'Active Agency',
+  agencyLoad: 'Load Agencies',
+  agencyClean: 'Clean Agency',
+  
 }

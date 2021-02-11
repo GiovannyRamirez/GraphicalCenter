@@ -26,7 +26,8 @@ export function Post ({ id, title, description, date, url }) {
         <div 
           className='post__entry-image'
           style={{
-            backgroundSize: 'cover',
+            backgroundSize: '100% 100%',
+            backgroundRepeat: 'no-repeat',
             backgroundImage: `url(${url})`
           }}     
         >

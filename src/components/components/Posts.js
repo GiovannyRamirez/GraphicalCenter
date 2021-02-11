@@ -9,7 +9,7 @@ export function Posts () {
     <div className='home__container'>      
       {
         posts && posts.length === 0 &&
-          <h1>No Data Available</h1>
+          <h1>No hay publicaciones</h1>
       }
       {
         posts && posts.length > 0 &&

@@ -1,13 +1,14 @@
-export function AgencyCard () {
-  
+
+
+export function AgencyCard ({ city, phone }) {
+
   return (
     <div className='card__agency pointer'>
       <div className='card__agency-image'>
       </div>
       <h3>Nombre</h3>
-      <p>Correo</p>
-      <p>Teléfono</p>
-      <p>Ciudad</p>
+      <p>{ phone }</p>
+      <p>{ city }</p>
     </div>
   )
 }

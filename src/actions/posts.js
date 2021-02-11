@@ -13,7 +13,7 @@ export const startNewPost = () => {
       date: new Date().getTime()
     }
 
-    const doc = await db.collection(`${ uid }/activity/posts`).add(newPost)
+    const doc = await db.collection(`users/${ uid }/posts`).add(newPost)
     dispatch(activePost(doc.id, newPost))
     dispatch(addNewPost(doc.id, newPost))
 
@@ -58,7 +58,7 @@ export const startSavePost = (post) => {
 
     const postToFirestore = { ...post }
     delete postToFirestore.id
-    await db.doc(`${uid}/activity/posts/${post.id}`).update(postToFirestore)
+    await db.doc(`users/${uid}/posts/${post.id}`).update(postToFirestore)
 
     dispatch(refreshPost(post.id, post))
     Swal.fire('Publicación guardada', post.title, 'success')
@@ -103,7 +103,7 @@ export const startDelete = (id) => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth
 
-    await db.doc(`${uid}/activity/posts/${id}`).delete()
+    await db.doc(`users/${uid}/posts/${id}`).delete()
 
     dispatch(deletePost(id))
     Swal.fire({

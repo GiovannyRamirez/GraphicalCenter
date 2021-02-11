@@ -14,6 +14,7 @@ import { EditProfile } from '../components/view/EditProfile'
 import { PrivateRoute } from './PrivateRoute'
 import { login } from '../actions/auth'
 import { startLoadPosts } from '../actions/posts'
+import { startLoadAgencies } from '../actions/agency'
 
 export function AppRouter () {
 
@@ -31,6 +32,7 @@ export function AppRouter () {
         setIsAuth(false)
       }
       setChecking(false)
+      dispatch(startLoadAgencies())
     })
   },[dispatch, setIsAuth, setChecking])
 

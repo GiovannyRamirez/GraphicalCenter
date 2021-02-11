@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { NothingSelected } from '../components/NothingSelected'
 import { PostScreen } from '../components/PostScreen'
+import { UpdateForm } from '../components/UpdateForm'
 import { startNewPost } from '../../actions/posts'
 
 export function SideBar () {
@@ -22,7 +23,10 @@ export function SideBar () {
           <div className='home__filter'>
             <h4 className='home__title'>
               {name}
-            </h4>
+            </h4>            
+          </div>
+          <div className='update__form'>
+            <UpdateForm />            
           </div>
           <div className='home__title'>
             <Link to='/'
